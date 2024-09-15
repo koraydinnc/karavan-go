@@ -4,6 +4,8 @@ import React from 'react';
 import Photo1 from '../app/assets/karavan.png'
 import {Inter, Roboto} from '@next/font/google'
 import {cookies} from 'next/headers'
+import Trial from './Trial'
+import {redirect} from 'next/navigation'
 
 
 const inter = Inter({
@@ -24,6 +26,12 @@ const Page = async() => {
    await sleep(3000)
    const newCookies = cookies()
 
+   let nav1 = false
+
+   if (nav1) {
+      redirect('/about')
+   }
+   
    console.log(newCookies.getAll())
    console.log(newCookies.get('cookie1').value)
    console.log(newCookies.getAll())
@@ -47,6 +55,7 @@ const Page = async() => {
         height={300}
         alt='Beautiful Landscape'
       />
+      <Trial/>
     </div>
   );
 }
