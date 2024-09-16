@@ -22,18 +22,38 @@ const roboto = Roboto({
 const sleep = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
+
+const fetchData = async() => {
+   const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags')
+   return response.json()
+}
+
+const fetchData2 = async() => {
+  const response = await fetch('https://restcountries.com/v3.1/all')
+  return response.json()
+}
+
 const Page = async() => {
    await sleep(3000)
    const newCookies = cookies()
 
    let nav1 = false
 
+   const data =  fetchData()
+   const data2 =  fetchData2()
+
+   const resultData = await Promise.all([
+    data,
+    data2
+   ]
+   )
+
+   console.log(resultData)
    if (nav1) {
       redirect('/about')
    }
    
    console.log(newCookies.getAll())
-   console.log(newCookies.get('cookie1').value)
    console.log(newCookies.getAll())
 
   return (
